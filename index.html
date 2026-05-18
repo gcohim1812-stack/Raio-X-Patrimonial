@@ -1470,6 +1470,9 @@ function enviar(){
   }).catch(function(){});
  
   /* Mensagem simples para o cliente — sem revelar dados */
+  var msgWa='Olá, Guilherme. Acabei de preencher o diagnóstico do Raio-X Patrimonial e os resultados chamaram minha atenção. Pelo que foi apresentado, pode haver uma oportunidade relevante no meu caso e gostaria de agendar uma reunião para entender melhor o que é possível estruturar.';
+  var waUrl='https://wa.me/'+SEU_WHATSAPP+'?text='+encodeURIComponent(msgWa);
+ 
   var okEl=document.getElementById('cta-ok');
   okEl.innerHTML=''
     +'<div style="text-align:center;width:100%">'
@@ -1477,11 +1480,17 @@ function enviar(){
     +'<i class="ti ti-circle-check" aria-hidden="true"></i> Solicitação recebida!'
     +'</div>'
     +'<div style="font-size:13px;color:rgba(255,255,255,0.45);line-height:1.6;margin-bottom:1.25rem">'
-    +'Entraremos em contato em breve para agendar sua reunião de análise.'
+    +'Clique abaixo para agendar sua reunião de análise ou baixar seu relatório.'
     +'</div>'
-    +'<button onclick="gerarPDF()" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);border-radius:10px;padding:.75rem 1.25rem;color:#fff;font-size:13px;font-family:\'DM Sans\',sans-serif;cursor:pointer;display:inline-flex;align-items:center;gap:7px">'
+    +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">'
+    +'<a href="'+waUrl+'" target="_blank" style="background:#25D366;border:none;border-radius:10px;padding:.75rem 1rem;color:#fff;font-size:13px;font-family:\'DM Sans\',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;text-decoration:none;font-weight:500">'
+    +'<i class="ti ti-brand-whatsapp" aria-hidden="true" style="font-size:16px"></i> Agendar reunião'
+    +'</a>'
+    +'<button onclick="gerarPDF()" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);border-radius:10px;padding:.75rem 1rem;color:#fff;font-size:13px;font-family:\'DM Sans\',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px">'
     +'<i class="ti ti-file-download" aria-hidden="true" style="font-size:16px;color:#C4973A"></i> Baixar meu relatório'
     +'</button>'
+    +'</div>'
+    +'<div style="font-size:11px;color:rgba(255,255,255,0.2);margin-top:.75rem">O WhatsApp abre com a mensagem pronta — basta clicar em enviar.</div>'
     +'</div>';
   okEl.style.display='block';
 }
@@ -1496,11 +1505,11 @@ function gerarPDF(){
     /* Monta HTML do relatório para o PDF */
     var conteudo='<div style="font-family:Arial,sans-serif;max-width:680px;margin:0 auto;color:#0D0D0D">';
     /* Cabeçalho */
-    conteudo+='<div style="background:#0B1728;padding:2rem;margin-bottom:1.5rem">';
-    conteudo+='<div style="font-size:11px;color:rgba(196,151,58,0.6);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem">Raio-X Patrimonial</div>';
-    conteudo+='<div style="font-size:28px;font-weight:700;color:#C4973A;margin-bottom:.25rem">'+fR(d.eco_ano)+'/ano</div>';
-    conteudo+='<div style="font-size:13px;color:rgba(255,255,255,0.45)">Potencial tributário identificado · sobe para '+fR(d.eco_ano_33)+'/ano em 2033</div>';
-    conteudo+='<div style="margin-top:.75rem;font-size:12px;color:rgba(255,255,255,0.3)">Perfil: '+d.perfilLabel+' · '+(emp?emp:'')+'</div>';
+    conteudo+='<div style="background:#F5F0E8;border:2px solid #C4973A;border-radius:8px;padding:1.5rem 2rem;margin-bottom:1.5rem">';
+    conteudo+='<div style="font-size:11px;color:#8A6520;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem;font-weight:600">Raio-X Patrimonial — Diagnóstico Tributário e Patrimonial</div>';
+    conteudo+='<div style="font-size:32px;font-weight:700;color:#8A6520;margin-bottom:.25rem">'+fR(d.eco_ano)+'/ano</div>';
+    conteudo+='<div style="font-size:13px;color:#3A3A3A">Potencial tributário identificado · sobe para '+fR(d.eco_ano_33)+'/ano em 2033</div>';
+    conteudo+='<div style="margin-top:.75rem;font-size:12px;color:#7A7A7A">Perfil: '+d.perfilLabel+(emp?' · '+emp:'')+'</div>';
     conteudo+='</div>';
     /* Métricas */
     conteudo+='<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;margin-bottom:1.5rem">';
@@ -1522,7 +1531,7 @@ function gerarPDF(){
       conteudo+='<div style="background:'+c.bg+';padding:.5rem .85rem;font-size:10px;font-weight:700;color:'+c.c+';text-transform:uppercase;letter-spacing:.05em">'+c.yr+'</div>';
       conteudo+='<div style="background:#FDECEA;padding:.65rem .85rem;border-bottom:1px solid #F5C6C2"><div style="font-size:9.5px;color:#922B21;font-weight:700;margin-bottom:.2rem">SEM ESTRUTURA</div><div style="font-size:16px;font-weight:700;color:#C0392B">'+fR(c.pf)+'/mês</div></div>';
       conteudo+='<div style="background:#EAF6F0;padding:.65rem .85rem;border-bottom:1px solid #C3E6D8"><div style="font-size:9.5px;color:#1A7A4A;font-weight:700;margin-bottom:.2rem">COM ESTRUTURA</div><div style="font-size:16px;font-weight:700;color:#1A7A4A">'+fR(c.h)+'/mês</div></div>';
-      conteudo+='<div style="background:#0B1728;padding:.6rem .85rem;text-align:center"><div style="font-size:9px;color:rgba(255,255,255,.35);margin-bottom:.15rem">ECONOMIA ESTIMADA</div><div style="font-size:15px;font-weight:700;color:#C4973A">'+fR(c.eco)+'/mês</div></div>';
+      conteudo+='<div style="background:#F5F0E8;padding:.6rem .85rem;text-align:center;border-top:1px solid #C4973A"><div style="font-size:9px;color:#8A6520;font-weight:600;margin-bottom:.15rem">ECONOMIA ESTIMADA</div><div style="font-size:15px;font-weight:700;color:#8A6520">'+fR(c.eco)+'/mês</div></div>';
       conteudo+='</div>';
     });
     conteudo+='</div>';
@@ -1556,22 +1565,22 @@ function gerarPDF(){
     conteudo+='</div>';
  
     var wrapper=document.createElement('div');
-    wrapper.style.cssText='position:fixed;left:-9999px;top:0;width:720px;background:#fff;z-index:-1';
+    wrapper.style.cssText='position:absolute;left:0;top:0;width:720px;background:#ffffff;z-index:9999;opacity:0;pointer-events:none';
     wrapper.innerHTML=conteudo;
     document.body.appendChild(wrapper);
  
     setTimeout(function(){
       var opt={
-        margin: [10,10,10,10],
+        margin: [12,12,12,12],
         filename: 'raio-x-patrimonial-'+nome.replace(/\s+/g,'-').toLowerCase()+'.pdf',
-        image: {type:'jpeg',quality:0.97},
-        html2canvas: {scale:2,useCORS:true,backgroundColor:'#ffffff'},
+        image: {type:'jpeg',quality:1},
+        html2canvas: {scale:2,useCORS:true,backgroundColor:'#ffffff',logging:false,removeContainer:false},
         jsPDF: {unit:'mm',format:'a4',orientation:'portrait'}
       };
       html2pdf().set(opt).from(wrapper).save().then(function(){
         document.body.removeChild(wrapper);
       });
-    }, 300);
+    }, 600);
   }
  
   if(typeof html2pdf!=='undefined'){
