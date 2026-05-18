@@ -1419,23 +1419,66 @@ function enviar(){
   var div=document.getElementById('i_div').value||'0';
   var alug=document.getElementById('i_alug_terc').value||'0';
  
-  var msg = 'Lead: '+n+' | WPP: '+w+' | Empresa: '+emp;
-  msg += ' | Prolabore: R$'+pl;
-  msg += ' | Dividendos: R$'+div;
-  msg += ' | Aluguel PF: R$'+alug;
-  msg += ' | Perfil S1: '+(A.s1||'-');
-  msg += ' | Imoveis S3: '+(A.s3||'-');
-  msg += ' | Locatarios S4: '+(A.s4||'-');
-  msg += ' | Imovel op S5: '+(A.s5||'-');
-  msg += ' | Empresas S7: '+(A.s7||'-');
-  msg += ' | Regime S8: '+(A.s8||'-');
-  msg += ' | Socios S9: '+(A.s9||'-');
-  msg += ' | Holding S10: '+(A.s10||'-');
-  msg += ' | Patrimonio S11: '+(A.s11||'-');
-  msg += ' | Objetivo S12: '+(A.s12||'-');
-  msg += ' | Potencial ano: '+(d.eco_ano||0);
-  msg += ' | Score pot: '+(d.sc_pot||0);
-  msg += ' | Score urg: '+(d.sc_urg||0);
+  var perfis={1:'Empresario com empresas operacionais',2:'Profissional liberal com PJ',3:'Investidor / rentista imobiliario',4:'Patrimonio misto'};
+  var nImovs={0:'Nenhum',1:'1 a 3 imoveis',2:'4 ou mais imoveis'};
+  var locTipos={0:'Nao tem',1:'Para pessoas fisicas',2:'Para empresas PJ',3:'Misto PF e PJ'};
+  var imOpcs={0:'Nao',1:'Sim'};
+  var nEmps={1:'1 empresa',2:'2 empresas',3:'3 empresas',4:'4 ou mais'};
+  var regimes={0:'Nao sabe',1:'Lucro Real',2:'Lucro Presumido',3:'Simples Nacional'};
+  var socios={1:'Apenas eu',2:'Eu mais conjuge ou filho',3:'3 ou mais participantes'};
+  var holdSits={0:'Nao - tudo na PF',1:'Avaliando',2:'Tenho, nao revisada',3:'Tenho, revisada'};
+  var patrims={1:'Ate R$1 milhao',2:'R$1M a R$5M',3:'R$5M a R$20M',4:'Acima de R$20M'};
+  var objs={1:'Reduzir carga tributaria',2:'Planejamento sucessorio',3:'Protecao patrimonial',4:'Todos'};
+ 
+  var msg = 'NOVO LEAD - RAIO-X PATRIMONIAL
+ 
+';
+  msg += 'CONTATO
+';
+  msg += 'Nome: '+n+'
+';
+  msg += 'WhatsApp: '+w+'
+';
+  msg += 'Empresa: '+emp+'
+ 
+';
+  msg += 'RESPOSTAS
+';
+  msg += '1. Perfil: '+(perfis[A.s1]||'-')+'
+';
+  msg += '2. Pro-labore: R$'+pl+'/mes
+';
+  msg += '3. Dividendos: R$'+div+'/mes
+';
+  msg += '4. Aluguel na PF: R$'+alug+'/mes
+';
+  msg += '5. Imoveis alugados: '+(nImovs[A.s3]||'-')+'
+';
+  msg += '6. Perfil dos locatarios: '+(locTipos[A.s4]||'-')+'
+';
+  msg += '7. Imovel operacional sem aluguel: '+(imOpcs[A.s5]||'-')+'
+';
+  msg += '8. Numero de empresas: '+(nEmps[A.s7]||'-')+'
+';
+  msg += '9. Regime tributario: '+(regimes[A.s8]||'-')+'
+';
+  msg += '10. Participantes: '+(socios[A.s9]||'-')+'
+';
+  msg += '11. Estrutura atual: '+(holdSits[A.s10]||'-')+'
+';
+  msg += '12. Patrimonio total: '+(patrims[A.s11]||'-')+'
+';
+  msg += '13. Objetivo: '+(objs[A.s12]||'-')+'
+ 
+';
+  msg += 'RESULTADO
+';
+  msg += 'Potencial ano: R$'+(d.eco_ano||0)+'
+';
+  msg += 'Score potencial: '+(d.sc_pot||0)+'/100
+';
+  msg += 'Score urgencia: '+(d.sc_urg||0)+'/100
+';
  
   fetch('https://formspree.io/f/xredgvpn', {
     method: 'POST',
@@ -1548,3 +1591,4 @@ function gerarPDF(){
 </script>
 </body>
 </html>
+ 
