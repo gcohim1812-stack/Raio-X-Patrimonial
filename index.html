@@ -1124,7 +1124,7 @@ body {
         <input class="cta-inp" id="inp-emp" type="text" placeholder="Nome da empresa (opcional)" style="margin-bottom:10px">
         <button class="cta-btn" onclick="enviar()">Quero minha análise completa</button>
       </div>
-      <div id="cta-ok" style="display:none"></div>
+      <div id="cta-ok" style="display:none" class="cta-ok"><i class="ti ti-circle-check" aria-hidden="true"></i> Recebemos! Entraremos em contato em breve.</div>
     </div>
     <div class="nota-legal"><strong>Raio-X Patrimonial — Impactos da Reforma e Oportunidades</strong><br>Simulação preliminar — não constitui parecer jurídico ou contábil. Fontes: EC 132/2023 · LC 214/2025 · Decreto 12.955/2026 · Lei 15.270/2025 · Valores sujeitos a validação técnica e análise documental individualizada.</div>
   </div>
@@ -1409,68 +1409,101 @@ var SEU_WHATSAPP = '5571999406688'; /* DDD + número, sem espaços ou símbolos 
 function enviar(){
   var n=document.getElementById('inp-nome').value.trim();
   var w=document.getElementById('inp-wpp').value.trim();
-  if(!n||!w){ alert('Preencha nome e WhatsApp'); return; }
+  if(!n||!w)return;
  
   document.getElementById('cta-form').style.display='none';
  
-  var d=DIAG||{};
-  var emp=document.getElementById('inp-emp').value.trim()||'-';
-  var pl=document.getElementById('i_pl').value||'0';
-  var div=document.getElementById('i_div').value||'0';
-  var alug=document.getElementById('i_alug_terc').value||'0';
+  /* Envia relatório completo para o escritório via Formspree — invisível ao cliente */
+  var d=DIAG;
+  var emp=document.getElementById('inp-emp').value.trim();
+  var perfis=['','Empresário com empresas operacionais','Profissional liberal com PJ própria','Investidor / rentista imobiliário','Patrimônio misto — empresas e imóveis'];
+  var regimes=['','Lucro Real','Lucro Presumido','Simples Nacional','Não sabe'];
+  var socios=['','Apenas eu','Eu + cônjuge ou 1 filho adulto','3 ou mais participantes'];
+  var holdSits=['Não — tudo na PF','Avaliando','Tenho, não revisada','Tenho, revisada recentemente'];
+  var patrims=['','Até R$1 milhão','R$1M a R$5M','R$5M a R$20M','Acima de R$20M'];
+  var objs=['','Reduzir carga tributária','Planejamento sucessório','Proteção patrimonial','Todos — visão completa'];
+  var nImovs=['Nenhum','1 a 3 imóveis','4 ou mais imóveis'];
+  var locTipos=['Não tem imóveis alugados','Principalmente para PF','Principalmente para PJ','Misto PF e PJ'];
+  var nEmps=[0,1,2,3,4];
  
-  var msg = 'Lead: '+n+' | WPP: '+w+' | Empresa: '+emp;
-  msg += ' | Prolabore: R$'+pl;
-  msg += ' | Dividendos: R$'+div;
-  msg += ' | Aluguel PF: R$'+alug;
-  msg += ' | Perfil S1: '+(A.s1||'-');
-  msg += ' | Imoveis S3: '+(A.s3||'-');
-  msg += ' | Locatarios S4: '+(A.s4||'-');
-  msg += ' | Imovel op S5: '+(A.s5||'-');
-  msg += ' | Empresas S7: '+(A.s7||'-');
-  msg += ' | Regime S8: '+(A.s8||'-');
-  msg += ' | Socios S9: '+(A.s9||'-');
-  msg += ' | Holding S10: '+(A.s10||'-');
-  msg += ' | Patrimonio S11: '+(A.s11||'-');
-  msg += ' | Objetivo S12: '+(A.s12||'-');
-  msg += ' | Potencial ano: '+(d.eco_ano||0);
-  msg += ' | Score pot: '+(d.sc_pot||0);
-  msg += ' | Score urg: '+(d.sc_urg||0);
+  var ops=[];
+  if(OPS.op_venda) ops.push('Venda de imóvel ou participação societária');
+  if(OPS.op_socio) ops.push('Entrada de novo sócio ou investidor');
+  if(OPS.op_exp) ops.push('Abertura de nova empresa ou expansão');
+  if(OPS.op_nada) ops.push('Nenhuma operação planejada');
+ 
+  var pl=+document.getElementById('i_pl').value||0;
+  var div=+document.getElementById('i_div').value||0;
+  var alugTerc=+document.getElementById('i_alug_terc').value||0;
+  var alugOp=A.s5===1?(+document.getElementById('i_alug_op').value||0):0;
+ 
+  var corpo='';
+  corpo+='NOVO LEAD — RAIO-X PATRIMONIAL\n';
+  corpo+='Recebido em: '+new Date().toLocaleString('pt-BR')+'\n\n';
+ 
+  corpo+='--- DADOS DO CONTATO ---\n';
+  corpo+='Nome: '+n+'\n';
+  corpo+='WhatsApp: '+w+'\n';
+  corpo+='Empresa: '+(emp||'—')+'\n\n';
+ 
+  corpo+='--- RESPOSTAS DO QUESTIONÁRIO ---\n';
+  corpo+='1. Perfil: '+(perfis[A.s1||1])+'\n';
+  corpo+='2. Pró-labore bruto: '+(pl>0?fR(pl)+'/mês':'Não informado')+'\n';
+  corpo+='3. Dividendos: '+(div>0?fR(div)+'/mês':'Não informado')+'\n';
+  corpo+='4. Aluguel recebido na PF: '+(alugTerc>0?fR(alugTerc)+'/mês':'Nenhum')+'\n';
+  corpo+='5. Imóveis alugados para terceiros: '+(nImovs[A.s3||0])+'\n';
+  corpo+='6. Perfil dos locatários: '+(locTipos[A.s4||0])+'\n';
+  corpo+='7. Empresas usam imóvel próprio sem pagar aluguel: '+(A.s5===1?'Sim — valor estimado '+fR(alugOp)+'/mês':'Não')+'\n';
+  corpo+='8. Número de empresas operacionais: '+(nEmps[A.s7||1])+'\n';
+  corpo+='9. Regime tributário: '+(regimes[A.s8||0]||'Não informado')+'\n';
+  corpo+='10. Participantes na estrutura: '+(socios[A.s9||1])+'\n';
+  corpo+='11. Estrutura patrimonial atual: '+(holdSits[A.s10||0])+'\n';
+  corpo+='12. Patrimônio total: '+(patrims[A.s11||1])+'\n';
+  corpo+='13. Operações planejadas: '+(ops.length?ops.join(', '):'Nenhuma')+'\n';
+  corpo+='14. Principal objetivo: '+(objs[A.s12||1])+'\n\n';
+ 
+  corpo+='--- RESULTADO DO DIAGNÓSTICO ---\n';
+  corpo+='Potencial de economia hoje: '+fR(d.eco_ano)+'/ano\n';
+  corpo+='Potencial em 2033: '+fR(d.eco_ano_33)+'/ano\n';
+  corpo+='Score de potencial: '+d.sc_pot+'/100 ('+d.tagPot+')\n';
+  corpo+='Score de urgência: '+d.sc_urg+'/100 ('+d.tagUrg+')\n';
+  if(d.gatilho) corpo+='⚠ Gatilho IBS/CBS 2027 atingido\n';
+  if(d.alertaUrgente) corpo+='⚠ Sem estrutura patrimonial\n';
  
   fetch('https://formspree.io/f/xredgvpn', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
-    body: JSON.stringify({_subject: 'Lead Raio-X: '+n, mensagem: msg})
+    method:'POST',
+    headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify({_subject:'Raio-X Patrimonial - Novo lead: '+n, email:'guilherme.cohim@bfcadvogados.com.br', mensagem:corpo})
   })
-  .then(function(r){ return r.json(); })
-  .then(function(data){ console.log('Formspree:', JSON.stringify(data)); })
-  .catch(function(e){ console.log('Erro:', e); });
+  .then(function(res){return res.json();})
+  .then(function(data){if(!data.ok)alert('Erro: '+JSON.stringify(data));})
+  .catch(function(err){alert('Erro de conexao: '+err);});
  
-  var msgWa='Ola, Guilherme. Acabei de preencher o diagnostico do Raio-X Patrimonial e os resultados chamaram minha atencao. Pelo que foi apresentado, pode haver uma oportunidade relevante no meu caso e gostaria de agendar uma reuniao para entender melhor o que e possivel estruturar.';
+  /* Mensagem simples para o cliente — sem revelar dados */
+  var msgWa='Olá, Guilherme. Acabei de preencher o diagnóstico do Raio-X Patrimonial e os resultados chamaram minha atenção. Pelo que foi apresentado, pode haver uma oportunidade relevante no meu caso e gostaria de agendar uma reunião para entender melhor o que é possível estruturar.';
   var waUrl='https://wa.me/'+SEU_WHATSAPP+'?text='+encodeURIComponent(msgWa);
  
   var okEl=document.getElementById('cta-ok');
   okEl.innerHTML=''
     +'<div style="text-align:center;width:100%">'
     +'<div style="color:#82E0AA;font-size:15px;font-weight:500;display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:.75rem">'
-    +'<i class="ti ti-circle-check" aria-hidden="true"></i> Solicitacao recebida!'
+    +'<i class="ti ti-circle-check" aria-hidden="true"></i> Solicitação recebida!'
     +'</div>'
     +'<div style="font-size:13px;color:rgba(255,255,255,0.45);line-height:1.6;margin-bottom:1.25rem">'
-    +'Clique abaixo para agendar sua reuniao de analise ou baixar seu relatorio.'
+    +'Clique abaixo para agendar sua reunião de análise ou baixar seu relatório.'
     +'</div>'
     +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">'
-    +'<a href="'+waUrl+'" target="_blank" style="background:#25D366;border:none;border-radius:10px;padding:.75rem 1rem;color:#fff;font-size:13px;font-family:'DM Sans',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;text-decoration:none;font-weight:500">'
-    +'<i class="ti ti-brand-whatsapp" aria-hidden="true" style="font-size:16px"></i> Agendar reuniao'
+    +'<a href="'+waUrl+'" target="_blank" style="background:#25D366;border:none;border-radius:10px;padding:.75rem 1rem;color:#fff;font-size:13px;font-family:\'DM Sans\',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;text-decoration:none;font-weight:500">'
+    +'<i class="ti ti-brand-whatsapp" aria-hidden="true" style="font-size:16px"></i> Agendar reunião'
     +'</a>'
-    +'<button onclick="gerarPDF()" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);border-radius:10px;padding:.75rem 1rem;color:#fff;font-size:13px;font-family:'DM Sans',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px">'
-    +'<i class="ti ti-file-download" aria-hidden="true" style="font-size:16px;color:#C4973A"></i> Baixar meu relatorio'
+    +'<button onclick="gerarPDF()" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);border-radius:10px;padding:.75rem 1rem;color:#fff;font-size:13px;font-family:\'DM Sans\',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px">'
+    +'<i class="ti ti-file-download" aria-hidden="true" style="font-size:16px;color:#C4973A"></i> Baixar meu relatório'
     +'</button>'
     +'</div>'
-    +'<div style="font-size:11px;color:rgba(255,255,255,0.2);margin-top:.75rem">O WhatsApp abre com a mensagem pronta.</div>'
+    +'<div style="font-size:11px;color:rgba(255,255,255,0.2);margin-top:.75rem">O WhatsApp abre com a mensagem pronta — basta clicar em enviar.</div>'
     +'</div>';
   okEl.style.display='block';
 }
- 
  
 function gerarPDF(){
   var d=DIAG;
