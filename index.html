@@ -34,9 +34,9 @@
   --r: 10px;
   --r-lg: 16px;
 }
- 
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
- 
+
 body {
   font-family: 'DM Sans', system-ui, sans-serif;
   background: var(--cream);
@@ -44,13 +44,13 @@ body {
   min-height: 100vh;
   line-height: 1.6;
 }
- 
+
 .shell {
   max-width: 680px;
   margin: 0 auto;
   padding: 0 0 4rem;
 }
- 
+
 /* HEADER */
 .site-header {
   background: var(--navy);
@@ -88,7 +88,7 @@ body {
   color: rgba(196,151,58,0.5);
   letter-spacing: 0.04em;
 }
- 
+
 /* PROGRESS */
 .prog-wrap {
   background: var(--navy);
@@ -114,7 +114,7 @@ body {
   color: rgba(196,151,58,0.5);
   letter-spacing: 0.04em;
 }
- 
+
 /* HERO — primeira tela */
 .hero {
   background: var(--navy);
@@ -148,14 +148,14 @@ body {
   margin: 0 auto;
   line-height: 1.65;
 }
- 
+
 /* STEP CONTAINER */
 .step { display: none; }
 .step.active { display: block; }
 .step-body {
   padding: 2rem 2rem 1.5rem;
 }
- 
+
 /* QUESTION */
 .q-eyebrow {
   font-size: 10.5px;
@@ -178,7 +178,7 @@ body {
   line-height: 1.6;
   margin-bottom: 1.5rem;
 }
- 
+
 /* OPTIONS */
 .opts { display: flex; flex-direction: column; gap: 8px; margin-bottom: 1.5rem; }
 .opt {
@@ -231,7 +231,7 @@ body {
   transition: all 0.15s;
 }
 .opt.sel .opt-check { background: var(--gold); border-color: var(--gold); color: #fff; }
- 
+
 /* GRID OPTIONS */
 .opts-grid {
   display: grid;
@@ -252,7 +252,7 @@ body {
 .og.sel { border-color: var(--gold); background: #FFFCF5; box-shadow: inset 0 0 0 1px var(--gold); }
 .og-t { font-size: 13.5px; font-weight: 500; color: var(--ink); margin-bottom: 2px; }
 .og-s { font-size: 11.5px; color: var(--ink-3); }
- 
+
 /* INPUTS */
 .inp-wrap { margin-bottom: 1.1rem; }
 .inp-label {
@@ -282,7 +282,7 @@ body {
 }
 .num-input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(196,151,58,0.1); }
 .num-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
- 
+
 /* INFO BOX */
 .info-box {
   background: var(--warn-lt);
@@ -294,7 +294,7 @@ body {
   line-height: 1.6;
   margin-bottom: 1.25rem;
 }
- 
+
 /* CHECKBOXES */
 .checks { display: flex; flex-direction: column; gap: 8px; margin-bottom: 1.5rem; }
 .chk {
@@ -325,7 +325,7 @@ body {
 }
 .chk.sel .chk-box { background: var(--gold); border-color: var(--gold); color: #fff; }
 .chk-txt { font-size: 13px; font-weight: 500; color: var(--ink); }
- 
+
 /* NAV BUTTONS */
 .nav {
   display: flex;
@@ -382,20 +382,20 @@ body {
   transition: opacity 0.15s;
 }
 .btn-final:disabled { opacity: 0.3; }
- 
+
 /* DIVIDER */
 .sect-divider {
   height: 1px;
   background: var(--cream-2);
   margin: 1.25rem 0;
 }
- 
+
 /* ============================
    DIAGNÓSTICO
    ============================ */
- 
+
 .diag-wrap { padding: 0; }
- 
+
 /* Header diagnóstico */
 .diag-header {
   background: var(--navy);
@@ -449,7 +449,7 @@ body {
 .pill-r { background: rgba(192,57,43,0.2); color: #F1948A; border: 1px solid rgba(192,57,43,0.3); }
 .pill-g { background: rgba(26,122,74,0.25); color: #82E0AA; border: 1px solid rgba(26,122,74,0.3); }
 .pill-a { background: rgba(196,151,58,0.15); color: var(--gold); border: 1px solid rgba(196,151,58,0.3); }
- 
+
 /* Cards do diagnóstico */
 .diag-section {
   padding: 1.5rem 2rem;
@@ -464,7 +464,7 @@ body {
   color: var(--ink-3);
   margin-bottom: 1rem;
 }
- 
+
 /* Métricas grid */
 .met-grid {
   display: grid;
@@ -496,7 +496,7 @@ body {
 .met-val-gold { color: var(--gold-dk); }
 .met-val-blu { color: var(--blue); }
 .met-sub { font-size: 11px; color: var(--ink-3); }
- 
+
 /* Cenários 3 colunas */
 .cen3 {
   display: grid;
@@ -549,7 +549,7 @@ body {
 .cen-eco-val { font-size: 17px; font-weight: 600; color: var(--gold); }
 .cen-eco-ano { font-size: 10px; color: rgba(255,255,255,0.35); margin-top: 0.1rem; }
 .cen-eco-nota { font-size: 10px; color: var(--gold); margin-top: 0.2rem; opacity: 0.8; }
- 
+
 .cen-alerta {
   background: var(--red-lt);
   border-radius: var(--r);
@@ -560,7 +560,7 @@ body {
   font-weight: 500;
   margin-top: 0.5rem;
 }
- 
+
 /* Barras comparativas */
 .bar-row { margin-bottom: 0.6rem; }
 .bar-meta { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 0.25rem; }
@@ -579,7 +579,7 @@ body {
   min-width: 4px;
   transition: width 0.7s cubic-bezier(0.4,0,0.2,1);
 }
- 
+
 /* Urgência */
 .urgencia-box {
   background: var(--navy);
@@ -611,7 +611,7 @@ body {
 .urg-item:last-child { border-bottom: none; }
 .urg-item i { flex-shrink: 0; margin-top: 2px; color: var(--gold); font-size: 14px; }
 .urg-item strong { color: rgba(255,255,255,0.9); }
- 
+
 /* Gatilho */
 .gatilho {
   border-radius: var(--r);
@@ -636,7 +636,7 @@ body {
 .gt-v .gtxt { color: #1A7A4A; }
 .gt-r .gtxt { color: #922B21; }
 .gt-a .gtxt { color: var(--warn); }
- 
+
 /* Painel final */
 .painel-final {
   background: var(--navy);
@@ -688,7 +688,7 @@ body {
 .pg-grn { color: #82E0AA; }
 .pg-blu { color: #85C1E9; }
 .pg-sub { font-size: 11px; color: rgba(255,255,255,0.25); }
- 
+
 .mesa-label {
   font-size: 10.5px;
   font-weight: 500;
@@ -712,7 +712,7 @@ body {
 }
 .mesa-lbl { font-size: 10px; color: #F1948A; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.3rem; }
 .mesa-val { font-size: 16px; font-weight: 500; color: #F1948A; }
- 
+
 .scores-label {
   font-size: 10.5px;
   font-weight: 500;
@@ -744,7 +744,7 @@ body {
 .s-med .score-val { color: var(--gold); }
 .s-med .score-fill { background: var(--gold); }
 .s-med .score-tag { background: rgba(196,151,58,0.2); color: var(--gold); }
- 
+
 .veredicto {
   border-radius: var(--r);
   padding: 0.9rem 1rem;
@@ -761,7 +761,7 @@ body {
 .vrd-neu .vrd-txt { color: rgba(255,255,255,0.6); }
 .vrd-pos .vrd-txt strong { color: #82E0AA; }
 .vrd-neu .vrd-txt strong { color: var(--gold); }
- 
+
 .painel-footer {
   text-align: center;
   padding: 0.75rem;
@@ -770,7 +770,7 @@ body {
 }
 .painel-footer-txt { font-size: 11px; color: rgba(255,255,255,0.2); }
 .painel-footer-nm { color: rgba(196,151,58,0.5); font-weight: 500; }
- 
+
 /* Alertas */
 .alerta {
   border-radius: var(--r);
@@ -789,7 +789,7 @@ body {
 .al-w i { color: #D97706; }
 .al-i { background: var(--blue-lt); color: var(--blue); border: 1px solid #BFDBFE; }
 .al-i i { color: var(--blue); }
- 
+
 /* CTA */
 .cta-section {
   background: var(--navy-mid);
@@ -848,7 +848,7 @@ body {
 }
 .cta-btn:hover { opacity: 0.9; }
 .cta-ok { text-align: center; padding: 1.5rem 0; color: #82E0AA; font-size: 15px; font-weight: 500; display: flex; align-items: center; justify-content: center; gap: 8px; }
- 
+
 /* Nota legal */
 .nota-legal {
   font-size: 10.5px;
@@ -858,7 +858,7 @@ body {
   border-top: 1px solid var(--cream-2);
   margin-top: 0;
 }
- 
+
 /* Divisor interno nas seções */
 .inline-sect-title {
   font-size: 10.5px;
@@ -873,7 +873,7 @@ body {
 </head>
 <body>
 <div class="shell">
- 
+
 <!-- HEADER FIXO -->
 <div class="site-header">
   <div class="brand">
@@ -884,7 +884,7 @@ body {
     </div>
   </div>
 </div>
- 
+
 <!-- PROGRESSO -->
 <div class="prog-wrap">
   <div class="prog-track"><div class="prog-fill" id="prog" style="width:8%"></div></div>
@@ -893,9 +893,9 @@ body {
     <span id="prog-pct">8%</span>
   </div>
 </div>
- 
+
 <!-- ===================== ETAPAS ===================== -->
- 
+
 <!-- S1 PERFIL -->
 <div class="step active" id="s1">
   <div class="hero">
@@ -932,7 +932,7 @@ body {
   </div>
   <div class="nav"><span></span><button class="btn-next" id="n1" onclick="go(2)" disabled>Continuar <i class="ti ti-arrow-right" aria-hidden="true" style="font-size:13px"></i></button></div>
 </div>
- 
+
 <!-- S2 RENDA -->
 <div class="step" id="s2">
   <div class="step-body">
@@ -953,7 +953,7 @@ body {
   </div>
   <div class="nav"><button class="btn-back" onclick="go(1)"><i class="ti ti-arrow-left" aria-hidden="true" style="font-size:13px"></i> Voltar</button><button class="btn-next" id="n2" onclick="go(3)" disabled>Continuar <i class="ti ti-arrow-right" aria-hidden="true" style="font-size:13px"></i></button></div>
 </div>
- 
+
 <!-- S3 IMÓVEIS -->
 <div class="step" id="s3">
   <div class="step-body">
@@ -968,7 +968,7 @@ body {
   </div>
   <div class="nav"><button class="btn-back" onclick="go(2)"><i class="ti ti-arrow-left" aria-hidden="true" style="font-size:13px"></i> Voltar</button><button class="btn-next" id="n3" onclick="go(4)" disabled>Continuar <i class="ti ti-arrow-right" aria-hidden="true" style="font-size:13px"></i></button></div>
 </div>
- 
+
 <!-- S4 LOCATÁRIOS -->
 <div class="step" id="s4">
   <div class="step-body">
@@ -984,7 +984,7 @@ body {
   </div>
   <div class="nav"><button class="btn-back" onclick="go(3)"><i class="ti ti-arrow-left" aria-hidden="true" style="font-size:13px"></i> Voltar</button><button class="btn-next" id="n4" onclick="go(5)" disabled>Continuar <i class="ti ti-arrow-right" aria-hidden="true" style="font-size:13px"></i></button></div>
 </div>
- 
+
 <!-- S5 IMÓVEL OPERACIONAL -->
 <div class="step" id="s5">
   <div class="step-body">
@@ -998,7 +998,7 @@ body {
   </div>
   <div class="nav"><button class="btn-back" onclick="go(4)"><i class="ti ti-arrow-left" aria-hidden="true" style="font-size:13px"></i> Voltar</button><button class="btn-next" id="n5" onclick="go(6)" disabled>Continuar <i class="ti ti-arrow-right" aria-hidden="true" style="font-size:13px"></i></button></div>
 </div>
- 
+
 <!-- S6 VALOR ALUGUEL OPERACIONAL -->
 <div class="step" id="s6">
   <div class="step-body">
@@ -1013,7 +1013,7 @@ body {
   </div>
   <div class="nav"><button class="btn-back" onclick="go(5)"><i class="ti ti-arrow-left" aria-hidden="true" style="font-size:13px"></i> Voltar</button><button class="btn-next" onclick="go(7)">Continuar <i class="ti ti-arrow-right" aria-hidden="true" style="font-size:13px"></i></button></div>
 </div>
- 
+
 <!-- S7 EMPRESAS -->
 <div class="step" id="s7">
   <div class="step-body">
@@ -1028,7 +1028,7 @@ body {
   </div>
   <div class="nav"><button class="btn-back" onclick="go(6)"><i class="ti ti-arrow-left" aria-hidden="true" style="font-size:13px"></i> Voltar</button><button class="btn-next" id="n7" onclick="go(8)" disabled>Continuar <i class="ti ti-arrow-right" aria-hidden="true" style="font-size:13px"></i></button></div>
 </div>
- 
+
 <!-- S8 REGIME -->
 <div class="step" id="s8">
   <div class="step-body">
@@ -1043,7 +1043,7 @@ body {
   </div>
   <div class="nav"><button class="btn-back" onclick="go(7)"><i class="ti ti-arrow-left" aria-hidden="true" style="font-size:13px"></i> Voltar</button><button class="btn-next" id="n8" onclick="go(9)" disabled>Continuar <i class="ti ti-arrow-right" aria-hidden="true" style="font-size:13px"></i></button></div>
 </div>
- 
+
 <!-- S9 SÓCIOS -->
 <div class="step" id="s9">
   <div class="step-body">
@@ -1058,7 +1058,7 @@ body {
   </div>
   <div class="nav"><button class="btn-back" onclick="go(8)"><i class="ti ti-arrow-left" aria-hidden="true" style="font-size:13px"></i> Voltar</button><button class="btn-next" id="n9" onclick="go(10)" disabled>Continuar <i class="ti ti-arrow-right" aria-hidden="true" style="font-size:13px"></i></button></div>
 </div>
- 
+
 <!-- S10 ESTRUTURA + PATRIMÔNIO -->
 <div class="step" id="s10">
   <div class="step-body">
@@ -1081,7 +1081,7 @@ body {
   </div>
   <div class="nav"><button class="btn-back" onclick="go(9)"><i class="ti ti-arrow-left" aria-hidden="true" style="font-size:13px"></i> Voltar</button><button class="btn-next" onclick="go(11)">Continuar <i class="ti ti-arrow-right" aria-hidden="true" style="font-size:13px"></i></button></div>
 </div>
- 
+
 <!-- S11 OPERAÇÕES + OBJETIVO -->
 <div class="step" id="s11">
   <div class="step-body">
@@ -1107,7 +1107,7 @@ body {
     <button class="btn-final" id="n11" onclick="calcDiag()"><i class="ti ti-radar" aria-hidden="true" style="font-size:14px"></i> Ver meu Raio-X</button>
   </div>
 </div>
- 
+
 <!-- DIAGNÓSTICO S12 -->
 <div class="step" id="s12">
   <div class="diag-wrap">
@@ -1129,14 +1129,14 @@ body {
     <div class="nota-legal"><strong>Raio-X Patrimonial — Impactos da Reforma e Oportunidades</strong><br>Simulação preliminar — não constitui parecer jurídico ou contábil. Fontes: EC 132/2023 · LC 214/2025 · Decreto 12.955/2026 · Lei 15.270/2025 · Valores sujeitos a validação técnica e análise documental individualizada.</div>
   </div>
 </div>
- 
+
 </div><!-- /shell -->
- 
+
 <script>
 var A={}, OPS={};
 var TOT=12;
 var DIAG={};
- 
+
 function setP(n){
   var c=Math.min(n,TOT),pct=Math.round(c/TOT*100);
   document.getElementById('prog').style.width=pct+'%';
@@ -1182,7 +1182,7 @@ function irpf(b){
 function fR(v){return 'R$\u00a0'+Math.round(Math.abs(v)).toLocaleString('pt-BR');}
 function fP(v){return (Math.round(v*10)/10).toFixed(1).replace('.',',')+'%';}
 function bw(v,mx){return mx>0?Math.max(3,Math.min(100,Math.round(v/mx*100)))+'%':'3%';}
- 
+
 function calcDiag(){
   var perfil   = A.s1||1;
   var pl       = +document.getElementById('i_pl').value||0;
@@ -1199,24 +1199,24 @@ function calcDiag(){
   var patrim   = A.s11||2;
   var obj      = A.s12||4;
   var isLR     = reg===1;
- 
+
   var LP26=0.1133,LP28=0.0951,LP33=0.1453;
   var PF28=0.2933,PF33=0.359;
   var IRRF=0.10;
   var lim_op=0,lim_h=0;
- 
+
   var inss_s=Math.min(pl,8475.55)*0.11;
   var pl_liq=pl-inss_s;
   var irpf_pl=irpf(pl_liq);
   var inss_p=pl*0.23;
   var enc_pl=inss_s+irpf_pl+inss_p;
- 
+
   var irrf_hj=Math.max(0,div-lim_op)*IRRF;
   var irpf_alug=alugTerc>0?irpf(pl_liq+alugTerc)-irpf(pl_liq):0;
   var var_pf_26=irrf_hj+irpf_alug;
   var var_pf_28=irrf_hj+alugTerc*PF28;
   var var_pf_33=irrf_hj+alugTerc*PF33;
- 
+
   var irrf_h=Math.max(0,div-lim_h)*IRRF;
   var lp_at=alugTerc*LP26;
   var lp_op=alugOp*LP26;
@@ -1224,12 +1224,12 @@ function calcDiag(){
   var var_h_26=irrf_h+lp_at+lp_op-ded_lr;
   var var_h_28=irrf_h+alugTerc*LP28+alugOp*LP26-ded_lr;
   var var_h_33=irrf_h+alugTerc*LP33+alugOp*LP26-ded_lr;
- 
+
   var eco26=Math.max(0,var_pf_26-var_h_26);
   var eco28=Math.max(0,var_pf_28-var_h_28);
   var eco33=Math.max(0,var_pf_33-var_h_33);
   var eco_ano=eco26*12,eco_ano_33=eco33*12;
- 
+
   var pf26_tot=enc_pl+var_pf_26,h26_tot=enc_pl+var_h_26;
   var pf28_tot=enc_pl+var_pf_28,h28_tot=enc_pl+var_h_28;
   var pf33_tot=enc_pl+var_pf_33,h33_tot=enc_pl+var_h_33;
@@ -1240,11 +1240,11 @@ function calcDiag(){
   var carga_h28=base>0?Math.max(0.10,h28_tot/base):0.10;
   var carga_pf33=base>0?pf33_tot/base:0;
   var carga_h33=base>0?Math.max(0.10,h33_tot/base):0.10;
- 
+
   var gatilho=nImov===2&&alugTerc*12>240000;
   var payStr='';
   var eco_liq_ano=eco26*12;
- 
+
   var sc_pot=0;
   if(eco26>0)sc_pot+=30;if(eco26>5000)sc_pot+=20;if(eco26>15000)sc_pot+=15;
   if(alugTerc>0)sc_pot+=15;if(alugOp>0&&isLR)sc_pot+=10;if(irrf_hj-irrf_h>0)sc_pot+=10;
@@ -1262,9 +1262,9 @@ function calcDiag(){
   var tagRob=sc_rob>=70?'Alta':sc_rob>=40?'Média':'Baixa';
   var tagUrg=sc_urg>=70?'Alta':sc_urg>=40?'Média':'Baixa';
   var perfilLabel=['','Empresário','Profissional Liberal','Investidor/Rentista','Patrimônio Misto'][perfil]||'—';
- 
+
   var html='';
- 
+
   // HEADER
   html+='<div class="diag-header">'
     +'<div class="diag-eyebrow"><i class="ti ti-radar" aria-hidden="true"></i>Raio-X Patrimonial · '+perfilLabel+'</div>'
@@ -1277,7 +1277,7 @@ function calcDiag(){
     +(irrf_hj>0?'<span class="pill pill-r">Tributação sobre dividendos</span>':'')
     +(alugOp>0&&isLR?'<span class="pill pill-a">Potencial adicional identificado</span>':'')
     +'</div></div>';
- 
+
   // MÉTRICAS
   html+='<div class="diag-section">'
     +'<div class="diag-sect-title">Síntese do diagnóstico</div>'
@@ -1287,7 +1287,7 @@ function calcDiag(){
     +'<div class="met-card"><div class="met-lbl">Potencial hoje</div><div class="met-val met-val-gold">'+fR(eco_ano)+'</div><div class="met-sub">'+fR(eco26)+'/mês</div></div>'
     +'<div class="met-card"><div class="met-lbl">Potencial em 2033</div><div class="met-val met-val-blu">'+fR(eco_ano_33)+'</div><div class="met-sub">reforma plena</div></div>'
     +'</div></div>';
- 
+
   // CENÁRIOS
   html+='<div class="diag-section">'
     +'<div class="diag-sect-title">Sua carga tributária — hoje, em 2027 e em 2033</div>'
@@ -1307,7 +1307,7 @@ function calcDiag(){
     +'<div class="cen-alerta"><i class="ti ti-trending-up" aria-hidden="true" style="margin-right:6px"></i>'
     +'Permanecer sem estrutura custará: <strong>'+fR(eco26*12)+'/ano hoje</strong> → <strong>'+fR(eco28*12)+'/ano em 2027</strong> → <strong>'+fR(eco33*12)+'/ano em 2033</strong>'
     +'</div></div>';
- 
+
   // BARRAS
   if(alugTerc>0||eco26>0){
     var bmx=Math.max(pf33_tot,h33_tot,1);
@@ -1318,7 +1318,7 @@ function calcDiag(){
     });
     html+='</div>';
   }
- 
+
   // URGÊNCIA
   html+='<div class="diag-section"><div class="urgencia-box">'
     +'<div class="urg-header"><div class="urg-title"><i class="ti ti-clock-bolt" aria-hidden="true"></i>Por que agir em 2026 — a janela que a maioria não conhece</div></div>'
@@ -1328,7 +1328,7 @@ function calcDiag(){
     +(locTipo===2||locTipo===3?'<div class="urg-item"><i class="ti ti-circle-check" aria-hidden="true"></i><span><strong>Locatários PJ:</strong> a partir de 2027 só aproveitam crédito de CBS/IBS se o locador for PJ estruturado. Garante vantagem competitiva permanente no mercado corporativo.</span></div>':'')
     +'<div class="urg-item"><i class="ti ti-circle-check" aria-hidden="true"></i><span><strong>2033: carga máxima.</strong> PF pode pagar até 35,9% sobre aluguel. Estrutura otimizada paga entre 14,5% e 18,8%. Quem não agiu arca com o custo integral da reforma.</span></div>'
     +'</div></div>';
- 
+
   // GATILHO
   html+='<div class="diag-section"><div class="diag-sect-title">Enquadramento na reforma tributária</div>';
   if(alugTerc===0){
@@ -1341,7 +1341,7 @@ function calcDiag(){
     html+='<div class="gatilho gt-v"><div class="gtit"><i class="ti ti-check" aria-hidden="true"></i>Abaixo do gatilho — economia imediata mesmo assim</div><div class="gtxt">A vantagem existe desde o primeiro mês — independentemente da reforma.</div></div>';
   }
   html+='</div>';
- 
+
   // PAINEL FINAL
   html+='<div class="diag-section"><div class="painel-final">'
     +'<div class="painel-hdr"><div class="painel-brand-row"><i class="ti ti-radar" aria-hidden="true"></i><span class="painel-brand-nm">Raio-X Patrimonial</span></div>'
@@ -1370,20 +1370,20 @@ function calcDiag(){
       :'<div class="veredicto vrd-neu"><i class="ti ti-info-circle" aria-hidden="true" style="font-size:18px;margin-top:1px"></i><div class="vrd-txt"><strong>Perfil de proteção e sucessão:</strong> a economia tributária direta identificada não supera o custo da estrutura no cenário atual. O valor está na proteção patrimonial, planejamento sucessório e preparação para a reforma tributária de 2027.</div></div>')
     +'<div class="painel-footer"><span class="painel-footer-txt">Diagnóstico gerado por <span class="painel-footer-nm">Raio-X Patrimonial</span> · Impactos da Reforma e Oportunidades</span></div>'
     +'</div></div></div>';
- 
+
   var alertas=[];
   if(holdSit===0||holdSit===1) alertas.push({t:'d',msg:'<strong>2026 é o último ano do regime antigo.</strong> Quem estruturar agora chega a 2027 pagando menos do que paga hoje — e com toda a adaptação à reforma já resolvida.'});
   if(holdSit===2) alertas.push({t:'w',msg:'<strong>Estrutura existente pode não estar preparada:</strong> as regras mudaram com o Decreto 12.955/2026 e a Lei 15.270/2025. Uma revisão pode revelar potencial não capturado.'});
   if(alugOp>0&&!isLR) alertas.push({t:'w',msg:'<strong>Potencial adicional identificado — regime atual limita o benefício:</strong> a análise completa avaliará a viabilidade de otimização para este fluxo.'});
   if(patrim>=3) alertas.push({t:'i',msg:'<strong>Patrimônio relevante — sucessão amplifica o benefício:</strong> com a estrutura constituída, a transferência para herdeiros pode reduzir o custo de inventário em 40–70%.'});
- 
+
   if(alertas.length){
     html+='<div class="diag-section">'+alertas.map(function(a){
       var ico=a.t==='d'?'ti-alert-triangle':a.t==='w'?'ti-info-circle':'ti-bulb';
       return '<div class="alerta al-'+a.t+'"><i class="ti '+ico+'" aria-hidden="true"></i><span>'+a.msg+'</span></div>';
     }).join('')+'</div>';
   }
- 
+
   DIAG={
     perfilLabel:perfilLabel,
     eco26:eco26, eco28:eco28, eco33:eco33,
@@ -1397,22 +1397,22 @@ function calcDiag(){
     alertaUrgente:(holdSit===0||holdSit===1),
     diagHtml:html
   };
- 
+
   document.getElementById('diag-out').innerHTML=html;
   go(12);
 }
- 
+
 /* ====== CONFIGURAÇÃO — altere apenas esta linha ====== */
 var SEU_WHATSAPP = '5571999406688'; /* DDD + número, sem espaços ou símbolos */
 /* ===================================================== */
- 
+
 function enviar(){
   var n=document.getElementById('inp-nome').value.trim();
   var w=document.getElementById('inp-wpp').value.trim();
   if(!n||!w)return;
- 
+
   document.getElementById('cta-form').style.display='none';
- 
+
   /* Envia relatório completo para o escritório via Formspree — invisível ao cliente */
   var d=DIAG;
   var emp=document.getElementById('inp-emp').value.trim();
@@ -1425,27 +1425,27 @@ function enviar(){
   var nImovs=['Nenhum','1 a 3 imóveis','4 ou mais imóveis'];
   var locTipos=['Não tem imóveis alugados','Principalmente para PF','Principalmente para PJ','Misto PF e PJ'];
   var nEmps=[0,1,2,3,4];
- 
+
   var ops=[];
   if(OPS.op_venda) ops.push('Venda de imóvel ou participação societária');
   if(OPS.op_socio) ops.push('Entrada de novo sócio ou investidor');
   if(OPS.op_exp) ops.push('Abertura de nova empresa ou expansão');
   if(OPS.op_nada) ops.push('Nenhuma operação planejada');
- 
+
   var pl=+document.getElementById('i_pl').value||0;
   var div=+document.getElementById('i_div').value||0;
   var alugTerc=+document.getElementById('i_alug_terc').value||0;
   var alugOp=A.s5===1?(+document.getElementById('i_alug_op').value||0):0;
- 
+
   var corpo='';
   corpo+='NOVO LEAD — RAIO-X PATRIMONIAL\n';
   corpo+='Recebido em: '+new Date().toLocaleString('pt-BR')+'\n\n';
- 
+
   corpo+='--- DADOS DO CONTATO ---\n';
   corpo+='Nome: '+n+'\n';
   corpo+='WhatsApp: '+w+'\n';
   corpo+='Empresa: '+(emp||'—')+'\n\n';
- 
+
   corpo+='--- RESPOSTAS DO QUESTIONÁRIO ---\n';
   corpo+='1. Perfil: '+(perfis[A.s1||1])+'\n';
   corpo+='2. Pró-labore bruto: '+(pl>0?fR(pl)+'/mês':'Não informado')+'\n';
@@ -1461,7 +1461,7 @@ function enviar(){
   corpo+='12. Patrimônio total: '+(patrims[A.s11||1])+'\n';
   corpo+='13. Operações planejadas: '+(ops.length?ops.join(', '):'Nenhuma')+'\n';
   corpo+='14. Principal objetivo: '+(objs[A.s12||1])+'\n\n';
- 
+
   corpo+='--- RESULTADO DO DIAGNÓSTICO ---\n';
   corpo+='Potencial de economia hoje: '+fR(d.eco_ano)+'/ano\n';
   corpo+='Potencial em 2033: '+fR(d.eco_ano_33)+'/ano\n';
@@ -1469,20 +1469,39 @@ function enviar(){
   corpo+='Score de urgência: '+d.sc_urg+'/100 ('+d.tagUrg+')\n';
   if(d.gatilho) corpo+='⚠ Gatilho IBS/CBS 2027 atingido\n';
   if(d.alertaUrgente) corpo+='⚠ Sem estrutura patrimonial\n';
- 
+
+  var payload = {
+    _subject: 'Lead: '+n,
+    nome: n,
+    whatsapp: w,
+    empresa: emp||'-',
+    perfil: perfis[A.s1||1],
+    prolabore: pl,
+    dividendos: div,
+    aluguel_pf: alugTerc,
+    imoveis: nImovs[A.s3||0],
+    locatarios: locTipos[A.s4||0],
+    empresas: nEmps[A.s7||1],
+    regime: regimes[A.s8||0]||'-',
+    patrimonio: patrims[A.s11||1],
+    objetivo: objs[A.s12||1],
+    potencial_ano: fR(d.eco_ano),
+    score_pot: d.sc_pot,
+    score_urg: d.sc_urg
+  };
   fetch('https://formspree.io/f/xredgvpn', {
     method:'POST',
     headers:{'Content-Type':'application/json','Accept':'application/json'},
-    body:JSON.stringify({_subject:'Raio-X Patrimonial - Novo lead: '+n, email:'guilherme.cohim@bfcadvogados.com.br', mensagem:corpo})
+    body:JSON.stringify(payload)
   })
   .then(function(res){return res.json();})
   .then(function(data){if(!data.ok)alert('Erro: '+JSON.stringify(data));})
-  .catch(function(err){alert('Erro de conexao: '+err);});
- 
+  .catch(function(err){alert('Erro: '+err);});
+
   /* Mensagem simples para o cliente — sem revelar dados */
   var msgWa='Olá, Guilherme. Acabei de preencher o diagnóstico do Raio-X Patrimonial e os resultados chamaram minha atenção. Pelo que foi apresentado, pode haver uma oportunidade relevante no meu caso e gostaria de agendar uma reunião para entender melhor o que é possível estruturar.';
   var waUrl='https://wa.me/'+SEU_WHATSAPP+'?text='+encodeURIComponent(msgWa);
- 
+
   var okEl=document.getElementById('cta-ok');
   okEl.innerHTML=''
     +'<div style="text-align:center;width:100%">'
@@ -1504,12 +1523,12 @@ function enviar(){
     +'</div>';
   okEl.style.display='block';
 }
- 
+
 function gerarPDF(){
   var d=DIAG;
   var nome=document.getElementById('inp-nome').value.trim()||'cliente';
   var emp=document.getElementById('inp-emp').value.trim();
- 
+
   var html='';
   html+='<div style="font-family:Arial,sans-serif;color:#111;padding:24px;max-width:700px;margin:0 auto;">';
   html+='<div style="border:2px solid #C4973A;background:#faf8f4;padding:20px;margin-bottom:20px;">';
@@ -1518,7 +1537,7 @@ function gerarPDF(){
   html+='<div style="font-size:13px;color:#444;margin-bottom:4px;">Potencial tributário · sobe para '+fR(d.eco_ano_33)+'/ano em 2033</div>';
   html+='<div style="font-size:12px;color:#777;">Perfil: '+d.perfilLabel+(emp?' · '+emp:'')+'</div>';
   html+='</div>';
- 
+
   html+='<p style="font-size:10px;font-weight:700;text-transform:uppercase;color:#777;margin:0 0 6px;">Síntese</p>';
   html+='<table width="100%" style="border-collapse:collapse;margin-bottom:16px;">';
   html+='<tr>';
@@ -1527,7 +1546,7 @@ function gerarPDF(){
   html+='<td style="border:1px solid #ddd;padding:10px;width:25%"><div style="font-size:9px;color:#777;text-transform:uppercase;margin-bottom:3px;">Potencial hoje</div><div style="font-size:15px;font-weight:700;color:#8A6520;">'+fR(d.eco_ano)+'/ano</div></td>';
   html+='<td style="border:1px solid #ddd;padding:10px;width:25%"><div style="font-size:9px;color:#777;text-transform:uppercase;margin-bottom:3px;">Potencial 2033</div><div style="font-size:15px;font-weight:700;color:#1A4D8F;">'+fR(d.eco_ano_33)+'/ano</div></td>';
   html+='</tr></table>';
- 
+
   html+='<p style="font-size:10px;font-weight:700;text-transform:uppercase;color:#777;margin:0 0 6px;">Cenários</p>';
   html+='<table width="100%" style="border-collapse:collapse;margin-bottom:16px;">';
   var cens=[{yr:'2026',pf:d.pf26_tot,h:d.h26_tot,eco:d.eco26},{yr:'2027-2028',pf:d.pf26_tot,h:d.h26_tot,eco:d.eco28},{yr:'2033',pf:d.pf33_tot,h:d.h33_tot,eco:d.eco33}];
@@ -1541,14 +1560,14 @@ function gerarPDF(){
     html+='</tr>';
   });
   html+='</table>';
- 
+
   html+='<p style="font-size:10px;font-weight:700;text-transform:uppercase;color:#777;margin:0 0 6px;">Projeção acumulada sem agir</p>';
   html+='<table width="100%" style="border-collapse:collapse;margin-bottom:16px;"><tr>';
   [{l:'12 meses',v:fR(d.eco_ano)},{l:'3 anos',v:fR(d.eco_ano*3)},{l:'5 anos',v:fR(d.eco_ano*5)}].forEach(function(p){
     html+='<td style="border:1px solid #F5C6C2;background:#FDECEA;padding:10px;text-align:center;width:33%"><div style="font-size:10px;color:#922B21;font-weight:700;margin-bottom:3px;">'+p.l+'</div><div style="font-size:16px;font-weight:700;color:#C0392B;">'+p.v+'</div></td>';
   });
   html+='</tr></table>';
- 
+
   html+='<p style="font-size:10px;font-weight:700;text-transform:uppercase;color:#777;margin:0 0 6px;">Scores</p>';
   html+='<table width="100%" style="border-collapse:collapse;margin-bottom:16px;"><tr>';
   [{l:'Potencial',v:d.sc_pot,t:d.tagPot},{l:'Robustez',v:d.sc_rob,t:d.tagRob},{l:'Urgência',v:d.sc_urg,t:d.tagUrg}].forEach(function(s){
@@ -1556,10 +1575,10 @@ function gerarPDF(){
     html+='<td style="border:1px solid #ddd;padding:10px;text-align:center;width:33%"><div style="font-size:10px;color:#777;text-transform:uppercase;margin-bottom:3px;">'+s.l+'</div><div style="font-size:20px;font-weight:700;color:'+cor+'">'+s.v+'/100</div><div style="font-size:10px;font-weight:700;color:'+cor+'">'+s.t+'</div></td>';
   });
   html+='</tr></table>';
- 
+
   html+='<div style="border-top:1px solid #ddd;padding-top:10px;font-size:9px;color:#999;line-height:1.6;">Raio-X Patrimonial — Simulação preliminar. Não constitui parecer jurídico ou contábil. Fontes: EC 132/2023 · LC 214/2025 · Decreto 12.955/2026.</div>';
   html+='</div>';
- 
+
   /* Injeta estilo de impressão e dispara print */
   var estilo=document.getElementById('print-style');
   if(!estilo){
