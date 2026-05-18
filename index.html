@@ -1470,14 +1470,30 @@ function enviar(){
   if(d.gatilho) corpo+='⚠ Gatilho IBS/CBS 2027 atingido\n';
   if(d.alertaUrgente) corpo+='⚠ Sem estrutura patrimonial\n';
  
+  var payload = {
+    _subject: 'Raio-X Patrimonial - Novo lead: ' + n,
+    nome: n,
+    whatsapp: w,
+    empresa: emp || '-',
+    mensagem: corpo
+  };
+ 
   fetch('https://formspree.io/f/xredgvpn', {
-    method:'POST',
-    headers:{'Content-Type':'application/json','Accept':'application/json'},
-    body:JSON.stringify({_subject:'Raio-X Patrimonial - Novo lead: '+n, mensagem:corpo})
+    method: 'POST',
+    headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+    body: JSON.stringify(payload)
   })
-  .then(function(res){return res.json();})
-  .then(function(data){if(!data.ok)alert('Erro: '+JSON.stringify(data));})
-  .catch(function(err){alert('Erro de conexao: '+err);});
+  .then(function(res){ return res.json(); })
+  .then(function(data){
+    if(data.ok){
+      console.log('Email enviado com sucesso');
+    } else {
+      alert('Erro Formspree: ' + JSON.stringify(data));
+    }
+  })
+  .catch(function(err){
+    alert('Erro de conexao: ' + err);
+  });
  
   /* Mensagem simples para o cliente — sem revelar dados */
   var msgWa='Olá, Guilherme. Acabei de preencher o diagnóstico do Raio-X Patrimonial e os resultados chamaram minha atenção. Pelo que foi apresentado, pode haver uma oportunidade relevante no meu caso e gostaria de agendar uma reunião para entender melhor o que é possível estruturar.';
