@@ -1473,38 +1473,11 @@ function enviar(){
   fetch('https://formspree.io/f/xredgvpn', {
     method:'POST',
     headers:{'Content-Type':'application/json','Accept':'application/json'},
-    body:JSON.stringify({
-      _subject: 'Raio-X Patrimonial — Novo lead: '+n,
-      nome: n,
-      whatsapp: w,
-      empresa: emp||'—',
-      perfil: d.perfilLabel,
-      carga_atual: fR(d.pf26_tot)+'/mês',
-      carga_otimizada: fR(d.h26_tot)+'/mês',
-      potencial_ano: fR(d.eco_ano)+'/ano',
-      potencial_2033: fR(d.eco_ano_33)+'/ano',
-      economia_anual: fR(d.eco_liq_ano)+'/ano',
-      score_potencial: d.sc_pot+'/100 — '+d.tagPot,
-      score_robustez: d.sc_rob+'/100 — '+d.tagRob,
-      score_urgencia: d.sc_urg+'/100 — '+d.tagUrg,
-      gatilho_ibs: d.gatilho?'SIM':'NÃO',
-      sem_estrutura: d.alertaUrgente?'SIM':'NÃO',
-      mensagem: corpo
-    })
+    body:JSON.stringify({_subject:'Raio-X Patrimonial - Novo lead: '+n, mensagem:corpo})
   })
-  .then(function(res){
-    return res.json();
-  })
-  .then(function(data){
-    if(data.ok){
-      console.log('Formspree OK');
-    } else {
-      alert('Erro ao enviar: '+JSON.stringify(data));
-    }
-  })
-  .catch(function(err){
-    alert('Erro de conexão: '+err);
-  });
+  .then(function(res){return res.json();})
+  .then(function(data){if(!data.ok)alert('Erro: '+JSON.stringify(data));})
+  .catch(function(err){alert('Erro de conexao: '+err);});
  
   /* Mensagem simples para o cliente — sem revelar dados */
   var msgWa='Olá, Guilherme. Acabei de preencher o diagnóstico do Raio-X Patrimonial e os resultados chamaram minha atenção. Pelo que foi apresentado, pode haver uma oportunidade relevante no meu caso e gostaria de agendar uma reunião para entender melhor o que é possível estruturar.';
