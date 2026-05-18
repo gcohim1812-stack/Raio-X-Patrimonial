@@ -1416,29 +1416,59 @@ function enviar(){
   /* Envia relatório completo para o escritório via Formspree — invisível ao cliente */
   var d=DIAG;
   var emp=document.getElementById('inp-emp').value.trim();
+  var perfis=['','Empresário com empresas operacionais','Profissional liberal com PJ própria','Investidor / rentista imobiliário','Patrimônio misto — empresas e imóveis'];
+  var regimes=['','Lucro Real','Lucro Presumido','Simples Nacional','Não sabe'];
+  var socios=['','Apenas eu','Eu + cônjuge ou 1 filho adulto','3 ou mais participantes'];
+  var holdSits=['Não — tudo na PF','Avaliando','Tenho, não revisada','Tenho, revisada recentemente'];
+  var patrims=['','Até R$1 milhão','R$1M a R$5M','R$5M a R$20M','Acima de R$20M'];
+  var objs=['','Reduzir carga tributária','Planejamento sucessório','Proteção patrimonial','Todos — visão completa'];
+  var nImovs=['Nenhum','1 a 3 imóveis','4 ou mais imóveis'];
+  var locTipos=['Não tem imóveis alugados','Principalmente para PF','Principalmente para PJ','Misto PF e PJ'];
+  var nEmps=[0,1,2,3,4];
+ 
+  var ops=[];
+  if(OPS.op_venda) ops.push('Venda de imóvel ou participação societária');
+  if(OPS.op_socio) ops.push('Entrada de novo sócio ou investidor');
+  if(OPS.op_exp) ops.push('Abertura de nova empresa ou expansão');
+  if(OPS.op_nada) ops.push('Nenhuma operação planejada');
+ 
+  var pl=+document.getElementById('i_pl').value||0;
+  var div=+document.getElementById('i_div').value||0;
+  var alugTerc=+document.getElementById('i_alug_terc').value||0;
+  var alugOp=A.s5===1?(+document.getElementById('i_alug_op').value||0):0;
+ 
   var corpo='';
-  corpo+='NOVO LEAD — RAIO-X PATRIMONIAL\n\n';
-  corpo+='DADOS DO CONTATO\n';
+  corpo+='NOVO LEAD — RAIO-X PATRIMONIAL\n';
+  corpo+='Recebido em: '+new Date().toLocaleString('pt-BR')+'\n\n';
+ 
+  corpo+='--- DADOS DO CONTATO ---\n';
   corpo+='Nome: '+n+'\n';
   corpo+='WhatsApp: '+w+'\n';
-  if(emp) corpo+='Empresa: '+emp+'\n';
-  corpo+='\nPERFIL\n';
-  corpo+='Perfil: '+d.perfilLabel+'\n';
-  corpo+='\nDIAGNÓSTICO\n';
-  corpo+='Carga tributária atual: '+fR(d.pf26_tot)+'/mês ('+fP(d.carga_pf26*100)+' da renda)\n';
-  corpo+='Carga otimizada: '+fR(d.h26_tot)+'/mês ('+fP(d.carga_h26*100)+' da renda)\n';
-  corpo+='Potencial hoje: '+fR(d.eco_ano)+'/ano ('+fR(d.eco26)+'/mês)\n';
+  corpo+='Empresa: '+(emp||'—')+'\n\n';
+ 
+  corpo+='--- RESPOSTAS DO QUESTIONÁRIO ---\n';
+  corpo+='1. Perfil: '+(perfis[A.s1||1])+'\n';
+  corpo+='2. Pró-labore bruto: '+(pl>0?fR(pl)+'/mês':'Não informado')+'\n';
+  corpo+='3. Dividendos: '+(div>0?fR(div)+'/mês':'Não informado')+'\n';
+  corpo+='4. Aluguel recebido na PF: '+(alugTerc>0?fR(alugTerc)+'/mês':'Nenhum')+'\n';
+  corpo+='5. Imóveis alugados para terceiros: '+(nImovs[A.s3||0])+'\n';
+  corpo+='6. Perfil dos locatários: '+(locTipos[A.s4||0])+'\n';
+  corpo+='7. Empresas usam imóvel próprio sem pagar aluguel: '+(A.s5===1?'Sim — valor estimado '+fR(alugOp)+'/mês':'Não')+'\n';
+  corpo+='8. Número de empresas operacionais: '+(nEmps[A.s7||1])+'\n';
+  corpo+='9. Regime tributário: '+(regimes[A.s8||0]||'Não informado')+'\n';
+  corpo+='10. Participantes na estrutura: '+(socios[A.s9||1])+'\n';
+  corpo+='11. Estrutura patrimonial atual: '+(holdSits[A.s10||0])+'\n';
+  corpo+='12. Patrimônio total: '+(patrims[A.s11||1])+'\n';
+  corpo+='13. Operações planejadas: '+(ops.length?ops.join(', '):'Nenhuma')+'\n';
+  corpo+='14. Principal objetivo: '+(objs[A.s12||1])+'\n\n';
+ 
+  corpo+='--- RESULTADO DO DIAGNÓSTICO ---\n';
+  corpo+='Potencial de economia hoje: '+fR(d.eco_ano)+'/ano\n';
   corpo+='Potencial em 2033: '+fR(d.eco_ano_33)+'/ano\n';
-  corpo+='Economia anual estimada: '+fR(d.eco_liq_ano)+'\n';
-  corpo+='\nSCORES\n';
-  corpo+='Potencial: '+d.sc_pot+'/100 ('+d.tagPot+')\n';
-  corpo+='Robustez: '+d.sc_rob+'/100 ('+d.tagRob+')\n';
-  corpo+='Urgência: '+d.sc_urg+'/100 ('+d.tagUrg+')\n';
-  corpo+='\nALERTAS\n';
+  corpo+='Score de potencial: '+d.sc_pot+'/100 ('+d.tagPot+')\n';
+  corpo+='Score de urgência: '+d.sc_urg+'/100 ('+d.tagUrg+')\n';
   if(d.gatilho) corpo+='⚠ Gatilho IBS/CBS 2027 atingido\n';
-  if(d.alertaUrgente) corpo+='⚠ Sem estrutura patrimonial — janela de 2026 aberta\n';
-  if(!d.gatilho&&!d.alertaUrgente) corpo+='Nenhum alerta crítico\n';
-  corpo+='\nGerado via Raio-X Patrimonial em '+new Date().toLocaleString('pt-BR');
+  if(d.alertaUrgente) corpo+='⚠ Sem estrutura patrimonial\n';
  
   fetch('https://formspree.io/f/xredgvpn', {
     method:'POST',
