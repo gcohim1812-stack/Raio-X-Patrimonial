@@ -1430,55 +1430,29 @@ function enviar(){
   var patrims={1:'Ate R$1 milhao',2:'R$1M a R$5M',3:'R$5M a R$20M',4:'Acima de R$20M'};
   var objs={1:'Reduzir carga tributaria',2:'Planejamento sucessorio',3:'Protecao patrimonial',4:'Todos'};
  
-  var msg = 'NOVO LEAD - RAIO-X PATRIMONIAL
- 
-';
-  msg += 'CONTATO
-';
-  msg += 'Nome: '+n+'
-';
-  msg += 'WhatsApp: '+w+'
-';
-  msg += 'Empresa: '+emp+'
- 
-';
-  msg += 'RESPOSTAS
-';
-  msg += '1. Perfil: '+(perfis[A.s1]||'-')+'
-';
-  msg += '2. Pro-labore: R$'+pl+'/mes
-';
-  msg += '3. Dividendos: R$'+div+'/mes
-';
-  msg += '4. Aluguel na PF: R$'+alug+'/mes
-';
-  msg += '5. Imoveis alugados: '+(nImovs[A.s3]||'-')+'
-';
-  msg += '6. Perfil dos locatarios: '+(locTipos[A.s4]||'-')+'
-';
-  msg += '7. Imovel operacional sem aluguel: '+(imOpcs[A.s5]||'-')+'
-';
-  msg += '8. Numero de empresas: '+(nEmps[A.s7]||'-')+'
-';
-  msg += '9. Regime tributario: '+(regimes[A.s8]||'-')+'
-';
-  msg += '10. Participantes: '+(socios[A.s9]||'-')+'
-';
-  msg += '11. Estrutura atual: '+(holdSits[A.s10]||'-')+'
-';
-  msg += '12. Patrimonio total: '+(patrims[A.s11]||'-')+'
-';
-  msg += '13. Objetivo: '+(objs[A.s12]||'-')+'
- 
-';
-  msg += 'RESULTADO
-';
-  msg += 'Potencial ano: R$'+(d.eco_ano||0)+'
-';
-  msg += 'Score potencial: '+(d.sc_pot||0)+'/100
-';
-  msg += 'Score urgencia: '+(d.sc_urg||0)+'/100
-';
+  var msg = 'NOVO LEAD - RAIO-X PATRIMONIAL | ';
+  msg += 'CONTATO: ';
+  msg += 'Nome: '+n+' | ';
+  msg += 'WhatsApp: '+w+' | ';
+  msg += 'Empresa: '+emp+' || ';
+  msg += 'RESPOSTAS: ';
+  msg += '1.Perfil: '+(perfis[A.s1]||'-')+' | ';
+  msg += '2.Pro-labore: R$'+pl+'/mes | ';
+  msg += '3.Dividendos: R$'+div+'/mes | ';
+  msg += '4.Aluguel PF: R$'+alug+'/mes | ';
+  msg += '5.Imoveis: '+(nImovs[A.s3]||'-')+' | ';
+  msg += '6.Locatarios: '+(locTipos[A.s4]||'-')+' | ';
+  msg += '7.Imovel op: '+(imOpcs[A.s5]||'-')+' | ';
+  msg += '8.Empresas: '+(nEmps[A.s7]||'-')+' | ';
+  msg += '9.Regime: '+(regimes[A.s8]||'-')+' | ';
+  msg += '10.Participantes: '+(socios[A.s9]||'-')+' | ';
+  msg += '11.Estrutura: '+(holdSits[A.s10]||'-')+' | ';
+  msg += '12.Patrimonio: '+(patrims[A.s11]||'-')+' | ';
+  msg += '13.Objetivo: '+(objs[A.s12]||'-')+' || ';
+  msg += 'RESULTADO: ';
+  msg += 'Potencial: R$'+(d.eco_ano||0)+' | ';
+  msg += 'Score pot: '+(d.sc_pot||0)+'/100 | ';
+  msg += 'Score urg: '+(d.sc_urg||0)+'/100';
  
   fetch('https://formspree.io/f/xredgvpn', {
     method: 'POST',
