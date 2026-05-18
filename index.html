@@ -1419,32 +1419,21 @@ function enviar(){
   var div=document.getElementById('i_div').value||'0';
   var alug=document.getElementById('i_alug_terc').value||'0';
  
-  var p1=['','Empresario c/ empresas operacionais','Profissional liberal PJ','Investidor / rentista','Patrimonio misto'];
-  var p3=['Nenhum','1 a 3 imoveis','4 ou mais imoveis'];
-  var p4=['Nao tem','Para PF','Para PJ','Misto'];
-  var p5=['Nao','Sim'];
-  var p7=['','1 empresa','2 empresas','3 empresas','4 ou mais'];
-  var p8=['Nao sabe','Lucro Real','Lucro Presumido','Simples Nacional'];
-  var p9=['','Apenas eu','Eu mais conjuge/filho','3 ou mais'];
-  var p10=['Nao - tudo PF','Avaliando','Tenho nao revisada','Tenho revisada'];
-  var p11=['','Ate R$1mi','R$1M a R$5M','R$5M a R$20M','Acima R$20M'];
-  var p12=['','Reduzir tributos','Sucessao','Protecao','Todos'];
- 
   var msg = 'Lead: '+n+' | WPP: '+w+' | Empresa: '+emp;
   msg += ' | Prolabore: R$'+pl;
   msg += ' | Dividendos: R$'+div;
   msg += ' | Aluguel PF: R$'+alug;
-  msg += ' | Perfil: '+(p1[A.s1]||'-');
-  msg += ' | Imoveis: '+(p3[A.s3]||'-');
-  msg += ' | Locatarios: '+(p4[A.s4]||'-');
-  msg += ' | Imovel op: '+(p5[A.s5]||'-');
-  msg += ' | Empresas: '+(p7[A.s7]||'-');
-  msg += ' | Regime: '+(p8[A.s8]||'-');
-  msg += ' | Socios: '+(p9[A.s9]||'-');
-  msg += ' | Holding: '+(p10[A.s10]||'-');
-  msg += ' | Patrimonio: '+(p11[A.s11]||'-');
-  msg += ' | Objetivo: '+(p12[A.s12]||'-');
-  msg += ' | Potencial ano: R$'+(d.eco_ano||0);
+  msg += ' | Perfil S1: '+(A.s1||'-');
+  msg += ' | Imoveis S3: '+(A.s3||'-');
+  msg += ' | Locatarios S4: '+(A.s4||'-');
+  msg += ' | Imovel op S5: '+(A.s5||'-');
+  msg += ' | Empresas S7: '+(A.s7||'-');
+  msg += ' | Regime S8: '+(A.s8||'-');
+  msg += ' | Socios S9: '+(A.s9||'-');
+  msg += ' | Holding S10: '+(A.s10||'-');
+  msg += ' | Patrimonio S11: '+(A.s11||'-');
+  msg += ' | Objetivo S12: '+(A.s12||'-');
+  msg += ' | Potencial ano: '+(d.eco_ano||0);
   msg += ' | Score pot: '+(d.sc_pot||0);
   msg += ' | Score urg: '+(d.sc_urg||0);
  
@@ -1559,4 +1548,3 @@ function gerarPDF(){
 </script>
 </body>
 </html>
- 
