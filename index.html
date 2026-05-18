@@ -1502,85 +1502,142 @@ function gerarPDF(){
     var nome=document.getElementById('inp-nome').value.trim()||'cliente';
     var emp=document.getElementById('inp-emp').value.trim();
  
-    /* Monta HTML do relatório para o PDF */
-    var conteudo='<div style="font-family:Arial,sans-serif;max-width:680px;margin:0 auto;color:#0D0D0D">';
+    var linhaEstilo='border:1px solid #ddd;padding:8px 12px;font-size:12px;';
+    var thEstilo='background:#f5f0e8;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:#8A6520;padding:8px 12px;border:1px solid #ddd;';
+ 
+    var html='<div style="font-family:Arial,sans-serif;color:#0D0D0D;padding:20px;max-width:700px;margin:0 auto;">';
+ 
     /* Cabeçalho */
-    conteudo+='<div style="background:#F5F0E8;border:2px solid #C4973A;border-radius:8px;padding:1.5rem 2rem;margin-bottom:1.5rem">';
-    conteudo+='<div style="font-size:11px;color:#8A6520;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem;font-weight:600">Raio-X Patrimonial — Diagnóstico Tributário e Patrimonial</div>';
-    conteudo+='<div style="font-size:32px;font-weight:700;color:#8A6520;margin-bottom:.25rem">'+fR(d.eco_ano)+'/ano</div>';
-    conteudo+='<div style="font-size:13px;color:#3A3A3A">Potencial tributário identificado · sobe para '+fR(d.eco_ano_33)+'/ano em 2033</div>';
-    conteudo+='<div style="margin-top:.75rem;font-size:12px;color:#7A7A7A">Perfil: '+d.perfilLabel+(emp?' · '+emp:'')+'</div>';
-    conteudo+='</div>';
-    /* Métricas */
-    conteudo+='<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;margin-bottom:1.5rem">';
-    [{l:'Carga atual',v:fR(d.pf26_tot)+'/mês',c:'#C0392B'},{l:'Carga otimizada',v:fR(d.h26_tot)+'/mês',c:'#1A7A4A'},{l:'Potencial hoje',v:fR(d.eco_ano)+'/ano',c:'#8A6520'},{l:'Potencial 2033',v:fR(d.eco_ano_33)+'/ano',c:'#1A4D8F'}].forEach(function(m){
-      conteudo+='<div style="border:1px solid #E8E0D2;border-radius:8px;padding:.85rem">';
-      conteudo+='<div style="font-size:10px;color:#7A7A7A;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.3rem">'+m.l+'</div>';
-      conteudo+='<div style="font-size:16px;font-weight:700;color:'+m.c+'">'+m.v+'</div>';
-      conteudo+='</div>';
-    });
-    conteudo+='</div>';
+    html+='<div style="border:2px solid #C4973A;background:#faf8f4;padding:20px;margin-bottom:20px;border-radius:4px;">';
+    html+='<div style="font-size:11px;color:#8A6520;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;font-weight:700;">Raio-X Patrimonial — Diagnóstico Tributário e Patrimonial</div>';
+    html+='<div style="font-size:36px;font-weight:700;color:#8A6520;margin-bottom:4px;">'+fR(d.eco_ano)+'/ano</div>';
+    html+='<div style="font-size:13px;color:#3A3A3A;margin-bottom:6px;">Potencial tributário identificado · sobe para '+fR(d.eco_ano_33)+'/ano em 2033</div>';
+    html+='<div style="font-size:12px;color:#7A7A7A;">Perfil: '+d.perfilLabel+(emp?' · '+emp:'')+'</div>';
+    html+='</div>';
+ 
+    /* Métricas principais */
+    html+='<div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#7A7A7A;margin-bottom:8px;">Síntese do diagnóstico</div>';
+    html+='<table width="100%" cellpadding="0" cellspacing="4" style="margin-bottom:20px;">';
+    html+='<tr>';
+    html+='<td style="width:25%;border:1px solid #ddd;border-radius:4px;padding:10px;background:#fff;">';
+    html+='<div style="font-size:10px;color:#7A7A7A;text-transform:uppercase;margin-bottom:4px;">Carga atual</div>';
+    html+='<div style="font-size:16px;font-weight:700;color:#C0392B;">'+fR(d.pf26_tot)+'/mês</div>';
+    html+='<div style="font-size:10px;color:#7A7A7A;">'+fP(d.carga_pf26*100)+' da renda</div>';
+    html+='</td>';
+    html+='<td style="width:5%;"></td>';
+    html+='<td style="width:25%;border:1px solid #ddd;border-radius:4px;padding:10px;background:#fff;">';
+    html+='<div style="font-size:10px;color:#7A7A7A;text-transform:uppercase;margin-bottom:4px;">Carga otimizada</div>';
+    html+='<div style="font-size:16px;font-weight:700;color:#1A7A4A;">'+fR(d.h26_tot)+'/mês</div>';
+    html+='<div style="font-size:10px;color:#7A7A7A;">'+fP(d.carga_h26*100)+' da renda</div>';
+    html+='</td>';
+    html+='<td style="width:5%;"></td>';
+    html+='<td style="width:25%;border:1px solid #ddd;border-radius:4px;padding:10px;background:#fff;">';
+    html+='<div style="font-size:10px;color:#7A7A7A;text-transform:uppercase;margin-bottom:4px;">Potencial hoje</div>';
+    html+='<div style="font-size:16px;font-weight:700;color:#8A6520;">'+fR(d.eco_ano)+'/ano</div>';
+    html+='<div style="font-size:10px;color:#7A7A7A;">'+fR(d.eco26)+'/mês</div>';
+    html+='</td>';
+    html+='<td style="width:5%;"></td>';
+    html+='<td style="width:25%;border:1px solid #ddd;border-radius:4px;padding:10px;background:#fff;">';
+    html+='<div style="font-size:10px;color:#7A7A7A;text-transform:uppercase;margin-bottom:4px;">Potencial 2033</div>';
+    html+='<div style="font-size:16px;font-weight:700;color:#1A4D8F;">'+fR(d.eco_ano_33)+'/ano</div>';
+    html+='<div style="font-size:10px;color:#7A7A7A;">reforma plena</div>';
+    html+='</td>';
+    html+='</tr>';
+    html+='</table>';
+ 
     /* Cenários */
-    conteudo+='<h3 style="font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:#7A7A7A;margin-bottom:.75rem">Carga tributária — hoje, em 2027 e em 2033</h3>';
-    conteudo+='<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:1.5rem">';
-    [{yr:'2026 — Hoje',bg:'#EBF4FD',c:'#1A4D8F',pf:d.pf26_tot,h:d.h26_tot,cpf:d.carga_pf26,ch:d.carga_h26,eco:d.eco26},
-     {yr:'2027–2028',bg:'#EAF6F0',c:'#1A7A4A',pf:d.pf26_tot,h:d.h26_tot,cpf:d.carga_pf26,ch:d.carga_h26,eco:d.eco28},
-     {yr:'2033 · Reforma plena',bg:'#FEF3C7',c:'#92400E',pf:d.pf33_tot,h:d.h33_tot,cpf:d.carga_pf26,ch:d.carga_h26,eco:d.eco33}
-    ].forEach(function(c){
-      conteudo+='<div style="border:1px solid #E8E0D2;border-radius:8px;overflow:hidden">';
-      conteudo+='<div style="background:'+c.bg+';padding:.5rem .85rem;font-size:10px;font-weight:700;color:'+c.c+';text-transform:uppercase;letter-spacing:.05em">'+c.yr+'</div>';
-      conteudo+='<div style="background:#FDECEA;padding:.65rem .85rem;border-bottom:1px solid #F5C6C2"><div style="font-size:9.5px;color:#922B21;font-weight:700;margin-bottom:.2rem">SEM ESTRUTURA</div><div style="font-size:16px;font-weight:700;color:#C0392B">'+fR(c.pf)+'/mês</div></div>';
-      conteudo+='<div style="background:#EAF6F0;padding:.65rem .85rem;border-bottom:1px solid #C3E6D8"><div style="font-size:9.5px;color:#1A7A4A;font-weight:700;margin-bottom:.2rem">COM ESTRUTURA</div><div style="font-size:16px;font-weight:700;color:#1A7A4A">'+fR(c.h)+'/mês</div></div>';
-      conteudo+='<div style="background:#F5F0E8;padding:.6rem .85rem;text-align:center;border-top:1px solid #C4973A"><div style="font-size:9px;color:#8A6520;font-weight:600;margin-bottom:.15rem">ECONOMIA ESTIMADA</div><div style="font-size:15px;font-weight:700;color:#8A6520">'+fR(c.eco)+'/mês</div></div>';
-      conteudo+='</div>';
+    html+='<div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#7A7A7A;margin-bottom:8px;">Carga tributária — hoje, em 2027 e em 2033</div>';
+    html+='<table width="100%" cellpadding="0" cellspacing="4" style="margin-bottom:20px;">';
+    html+='<tr>';
+    [{yr:'2026 — Hoje',bg:'#EBF4FD',c:'#1A4D8F',pf:d.pf26_tot,h:d.h26_tot,eco:d.eco26},
+     {yr:'2027–2028',bg:'#EAF6F0',c:'#1A7A4A',pf:d.pf26_tot,h:d.h26_tot,eco:d.eco28},
+     {yr:'2033 · Reforma plena',bg:'#FEF3C7',c:'#92400E',pf:d.pf33_tot,h:d.h33_tot,eco:d.eco33}
+    ].forEach(function(c,i){
+      if(i>0) html+='<td style="width:2%;"></td>';
+      html+='<td style="width:32%;border:1px solid #ddd;border-radius:4px;overflow:hidden;vertical-align:top;">';
+      html+='<div style="background:'+c.bg+';padding:6px 10px;font-size:10px;font-weight:700;color:'+c.c+';text-transform:uppercase;letter-spacing:.04em;">'+c.yr+'</div>';
+      html+='<div style="background:#FDECEA;padding:8px 10px;border-bottom:1px solid #F5C6C2;">';
+      html+='<div style="font-size:9px;color:#922B21;font-weight:700;margin-bottom:2px;">SEM ESTRUTURA</div>';
+      html+='<div style="font-size:15px;font-weight:700;color:#C0392B;">'+fR(c.pf)+'/mês</div>';
+      html+='</div>';
+      html+='<div style="background:#EAF6F0;padding:8px 10px;border-bottom:1px solid #C3E6D8;">';
+      html+='<div style="font-size:9px;color:#1A7A4A;font-weight:700;margin-bottom:2px;">COM ESTRUTURA</div>';
+      html+='<div style="font-size:15px;font-weight:700;color:#1A7A4A;">'+fR(c.h)+'/mês</div>';
+      html+='</div>';
+      html+='<div style="background:#f5f0e8;padding:8px 10px;text-align:center;">';
+      html+='<div style="font-size:9px;color:#8A6520;font-weight:700;margin-bottom:2px;">ECONOMIA</div>';
+      html+='<div style="font-size:15px;font-weight:700;color:#8A6520;">'+fR(c.eco)+'/mês</div>';
+      html+='</div>';
+      html+='</td>';
     });
-    conteudo+='</div>';
-    /* Scores */
-    conteudo+='<h3 style="font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:#7A7A7A;margin-bottom:.75rem">Indicadores do diagnóstico</h3>';
-    conteudo+='<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:1.5rem">';
-    [{l:'Score de potencial',v:d.sc_pot,t:d.tagPot},{l:'Score de robustez',v:d.sc_rob,t:d.tagRob},{l:'Urgência de revisão',v:d.sc_urg,t:d.tagUrg}].forEach(function(s){
-      var cor=s.v>=70?'#1A7A4A':'#8A6520';
-      conteudo+='<div style="border:1px solid #E8E0D2;border-radius:8px;padding:.75rem;text-align:center">';
-      conteudo+='<div style="font-size:10px;color:#7A7A7A;text-transform:uppercase;letter-spacing:.04em;margin-bottom:.35rem">'+s.l+'</div>';
-      conteudo+='<div style="font-size:22px;font-weight:700;color:'+cor+'">'+s.v+'/100</div>';
-      conteudo+='<div style="font-size:10px;font-weight:700;color:'+cor+';margin-top:.25rem">'+s.t+'</div>';
-      conteudo+='</div>';
-    });
-    conteudo+='</div>';
+    html+='</tr></table>';
+ 
     /* Projeção */
-    conteudo+='<h3 style="font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:#7A7A7A;margin-bottom:.75rem">Deixado na mesa sem agir</h3>';
-    conteudo+='<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:1.5rem">';
-    [{l:'Em 12 meses',v:fR(d.eco_ano)},{l:'Em 3 anos',v:fR(d.eco_ano*3)},{l:'Em 5 anos',v:fR(d.eco_ano*5)}].forEach(function(p){
-      conteudo+='<div style="background:#FDECEA;border:1px solid #F5C6C2;border-radius:8px;padding:.75rem;text-align:center">';
-      conteudo+='<div style="font-size:10px;color:#922B21;text-transform:uppercase;font-weight:700;margin-bottom:.3rem">'+p.l+'</div>';
-      conteudo+='<div style="font-size:17px;font-weight:700;color:#C0392B">'+p.v+'</div>';
-      conteudo+='</div>';
+    html+='<div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#7A7A7A;margin-bottom:8px;">Deixado na mesa sem agir</div>';
+    html+='<table width="100%" cellpadding="0" cellspacing="4" style="margin-bottom:20px;">';
+    html+='<tr>';
+    [{l:'Em 12 meses',v:fR(d.eco_ano)},{l:'Em 3 anos',v:fR(d.eco_ano*3)},{l:'Em 5 anos',v:fR(d.eco_ano*5)}].forEach(function(p,i){
+      if(i>0) html+='<td style="width:2%;"></td>';
+      html+='<td style="width:32%;background:#FDECEA;border:1px solid #F5C6C2;border-radius:4px;padding:10px;text-align:center;">';
+      html+='<div style="font-size:10px;color:#922B21;font-weight:700;text-transform:uppercase;margin-bottom:4px;">'+p.l+'</div>';
+      html+='<div style="font-size:17px;font-weight:700;color:#C0392B;">'+p.v+'</div>';
+      html+='</td>';
     });
-    conteudo+='</div>';
+    html+='</tr></table>';
+ 
+    /* Scores */
+    html+='<div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#7A7A7A;margin-bottom:8px;">Indicadores do diagnóstico</div>';
+    html+='<table width="100%" cellpadding="0" cellspacing="4" style="margin-bottom:20px;">';
+    html+='<tr>';
+    [{l:'Score de potencial',v:d.sc_pot,t:d.tagPot},{l:'Score de robustez',v:d.sc_rob,t:d.tagRob},{l:'Urgência de revisão',v:d.sc_urg,t:d.tagUrg}].forEach(function(s,i){
+      var cor=s.v>=70?'#1A7A4A':'#8A6520';
+      if(i>0) html+='<td style="width:2%;"></td>';
+      html+='<td style="width:32%;border:1px solid #ddd;border-radius:4px;padding:10px;text-align:center;">';
+      html+='<div style="font-size:10px;color:#7A7A7A;text-transform:uppercase;margin-bottom:4px;">'+s.l+'</div>';
+      html+='<div style="font-size:22px;font-weight:700;color:'+cor+';">'+s.v+'/100</div>';
+      html+='<div style="font-size:11px;font-weight:700;color:'+cor+';margin-top:3px;">'+s.t+'</div>';
+      html+='</td>';
+    });
+    html+='</tr></table>';
+ 
+    /* Payback */
+    html+='<table width="100%" cellpadding="0" cellspacing="4" style="margin-bottom:20px;">';
+    html+='<tr>';
+    html+='<td style="border:1px solid #ddd;border-radius:4px;padding:10px;text-align:center;">';
+    html+='<div style="font-size:10px;color:#7A7A7A;text-transform:uppercase;margin-bottom:4px;">Payback estimado</div>';
+    html+='<div style="font-size:18px;font-weight:700;color:#1A4D8F;">'+d.payStr+'</div>';
+    html+='</td>';
+    html+='<td style="width:3%;"></td>';
+    html+='<td style="border:1px solid #ddd;border-radius:4px;padding:10px;text-align:center;">';
+    html+='<div style="font-size:10px;color:#7A7A7A;text-transform:uppercase;margin-bottom:4px;">Economia líquida ao cliente/ano</div>';
+    html+='<div style="font-size:18px;font-weight:700;color:#1A7A4A;">'+fR(d.eco_liq_ano)+'</div>';
+    html+='</td>';
+    html+='</tr></table>';
+ 
     /* Nota legal */
-    conteudo+='<div style="border-top:1px solid #E8E0D2;padding-top:1rem;font-size:10px;color:#7A7A7A;line-height:1.6">';
-    conteudo+='<strong>Raio-X Patrimonial — Impactos da Reforma e Oportunidades</strong><br>';
-    conteudo+='Simulação preliminar — não constitui parecer jurídico ou contábil. Fontes: EC 132/2023 · LC 214/2025 · Decreto 12.955/2026 · Lei 15.270/2025 · Valores sujeitos a validação técnica e análise documental individualizada.';
-    conteudo+='</div>';
-    conteudo+='</div>';
+    html+='<div style="border-top:1px solid #E8E0D2;padding-top:10px;font-size:9px;color:#7A7A7A;line-height:1.6;">';
+    html+='<strong>Raio-X Patrimonial — Impactos da Reforma e Oportunidades</strong><br>';
+    html+='Simulação preliminar — não constitui parecer jurídico ou contábil. Fontes: EC 132/2023 · LC 214/2025 · Decreto 12.955/2026 · Lei 15.270/2025';
+    html+='</div>';
+    html+='</div>';
  
     var wrapper=document.createElement('div');
     wrapper.style.cssText='position:absolute;left:0;top:0;width:720px;background:#ffffff;z-index:9999;opacity:0;pointer-events:none';
-    wrapper.innerHTML=conteudo;
+    wrapper.innerHTML=html;
     document.body.appendChild(wrapper);
  
     setTimeout(function(){
       var opt={
-        margin: [12,12,12,12],
-        filename: 'raio-x-patrimonial-'+nome.replace(/\s+/g,'-').toLowerCase()+'.pdf',
-        image: {type:'jpeg',quality:1},
-        html2canvas: {scale:2,useCORS:true,backgroundColor:'#ffffff',logging:false,removeContainer:false},
-        jsPDF: {unit:'mm',format:'a4',orientation:'portrait'}
+        margin:[12,12,12,12],
+        filename:'raio-x-patrimonial-'+nome.replace(/\s+/g,'-').toLowerCase()+'.pdf',
+        image:{type:'jpeg',quality:1},
+        html2canvas:{scale:2,useCORS:true,backgroundColor:'#ffffff',logging:false},
+        jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}
       };
       html2pdf().set(opt).from(wrapper).save().then(function(){
         document.body.removeChild(wrapper);
       });
-    }, 600);
+    },600);
   }
  
   if(typeof html2pdf!=='undefined'){
@@ -1595,3 +1652,4 @@ function gerarPDF(){
 </script>
 </body>
 </html>
+ 
